@@ -7,8 +7,8 @@ const addGradient = data => (dispatch, getState) => {
 };
 
 const editGradient = data => (dispatch, getState) => {
-  console.log('editGradient Operations: data = ', data);
-  // dispatch(gradientSlice.actions.editGradient(data));
+  // console.log('editGradient Operations: data = ', data);
+  dispatch(gradientSlice.actions.editGradient(data));
 };
 
 const deleteGradient = data => (dispatch, getState) => {

@@ -1,12 +1,15 @@
 .title {
+  width: 100vw;
   font-size: 38px;
   line-height: 65px;
-  padding-bottom: 1em;
+  padding: 0.3em 0;
+  margin-bottom: 0.5em;
+  background-color: rgba(83, 81, 85, 0.5);
 }
 
 @media screen and (min-width: 560px) {
   .title {
     font-size: 48px;
-    padding-bottom: 1.25em;
+    padding: 0.5em 0;
   }
 }

@@ -1,17 +1,22 @@
-/* .clockBlock {
-  font-size: 2em;
-  margin-bottom: 1em;
+.itemList {
+  margin-bottom: 2em;
 }
 
-.buttonBlock {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 100%;
+.link {
+  padding: 0.2em 0.7em;
+  border-radius: 0.5em;
+  font-size: 1.2rem;
+  color: rgba(4, 4, 80, 0.9);
+  background-color: rgba(4, 4, 80, 0.2);
+  text-decoration: none;
+}
+.link:hover {
+  color: rgba(170, 10, 10, 0.9);
 }
 
+/* 
 @media screen and (min-width: 560px) {
-  .clockBlock {
+  .HomeBlock {
     font-size: 3em;
   }
 } */

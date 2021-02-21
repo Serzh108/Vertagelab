@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { addGradient } from '../../redux/gradientOperations';
+import Form from '../../components/Form/Form';
 import styles from './New.module.css';
 
 const initialState = {
@@ -30,13 +31,14 @@ export default function New() {
   // ===========---=============
   return (
     <>
-      <div className={styles.NewBlock}>
-        <h1>New gradient</h1>
-        <form onSubmit={submitHandler}>
+      <div>
+        <h1 className="title">New gradient</h1>
+        {/* <form className={styles.form} onSubmit={submitHandler}>
           <input
             name="start"
             type="text"
             onChange={inputHandler}
+            className={styles.input}
             placeholder="start gradient"
             required
           />
@@ -44,15 +46,20 @@ export default function New() {
             name="end"
             type="text"
             onChange={inputHandler}
+            className={styles.input}
             placeholder="end gradient"
             required
           />
-          <button type="submit" title="add gradient">
+          <button type="submit" title="add gradient" className={styles.button}>
             add gradient
           </button>
-        </form>
-        <p>First value: {newGradient.start}</p>
-        <p>End value: {newGradient.end}</p>
+        </form> */}
+        <Form
+          submitHandler={submitHandler}
+          inputHandler={inputHandler}
+          editedItem={null}
+          action="add"
+        />
       </div>
     </>
   );

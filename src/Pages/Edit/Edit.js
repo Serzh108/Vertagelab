@@ -1,39 +1,32 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { editGradient } from '../../redux/gradientOperations';
-import calcGradient from '../../helpers/calcGradient';
+// import calcGradient from '../../helpers/calcGradient';
+import Form from '../../components/Form/Form';
+import GradientBlock from '../../components/GradientBlock/GradientBlock';
 import styles from './Edit.module.css';
 
+let initState = {};
+
 export default function Edit({ match }) {
-  const [editedItem, setEditedItem] = useState({});
+  const history = useHistory();
   const dispatch = useDispatch();
   const currentId = match.params.id;
-  console.log('currentId :', currentId);
+  // console.log('currentId :', currentId);
   const currentItem = useSelector(state =>
     state.gradient.items.find(item => item.id === currentId),
   );
-  console.log('currentItem :', currentItem);
+  // console.log('currentItem :', currentItem);
+  const [editedItem, setEditedItem] = useState(initState);
 
   useEffect(() => {
     if (currentItem) {
       setEditedItem(currentItem);
+      // initState = { ...currentItem };
     }
   }, [currentItem]);
-  // const intervalId = useRef();
-  // const [clock, setClock] = useState(0);
-  // useEffect(() => {
-  //   if (isRun) {
-  //     intervalId.current = setInterval(() => setTime(new Date()), 1000);
-  //   }
-  //   return () => () => clearInterval(intervalId.current);
-  // }, [isRun]);
-  // const startClock = () => {
-  //   setClock(new Date());
-  //   setIsRun(true);
-  // };
 
-  // ===----------------===
-  //===----------------===
   // ===----------------===
   const inputHandler = event => {
     const { name, value } = event.target;
@@ -45,23 +38,23 @@ export default function Edit({ match }) {
   // ===----------------===
   const submitHandler = e => {
     e.preventDefault();
-    console.log('e.target', e.target);
     dispatch(editGradient(editedItem));
-    // history.push('/');
+    history.push('/');
   };
   // ===========---=============
 
   return (
     <>
       <div className={styles.EditBlock}>
-        <h1>Edit</h1>
-        <form onSubmit={submitHandler}>
+        <h1 className="title">Edit</h1>
+        {/* <form className={styles.form} onSubmit={submitHandler}>
           <input
             name="start"
             type="text"
             value={editedItem.start}
             onChange={inputHandler}
-            placeholder="start gradient"
+            className={styles.input}
+            // placeholder="start gradient"
             required
           />
           <input
@@ -69,18 +62,22 @@ export default function Edit({ match }) {
             type="text"
             value={editedItem.end}
             onChange={inputHandler}
-            placeholder="end gradient"
+            className={styles.input}
+            // placeholder="end gradient"
             required
           />
-          <button type="submit" title="add gradient">
+          <button type="submit" title="edit gradient" className={styles.button}>
             edit gradient
           </button>
-        </form>
-        <p
-          style={{ background: calcGradient(editedItem.start, editedItem.end) }}
-        >
-          Start value: {editedItem.start} End value: {editedItem.end}
-        </p>
+        </form> */}
+        <Form
+          submitHandler={submitHandler}
+          inputHandler={inputHandler}
+          editedItem={editedItem}
+          action="edit"
+        />
+
+        <GradientBlock item={editedItem} />
       </div>
     </>
   );
