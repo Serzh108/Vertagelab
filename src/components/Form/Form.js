@@ -1,18 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { addGradient } from '../../redux/gradientOperations';
 import { editGradient } from '../../redux/gradientOperations';
-import GradientBlock from '../../components/GradientBlock/GradientBlock';
+// import GradientBlock from '../../components/GradientBlock/GradientBlock';
+import validateValue from '../../helpers/validateValue';
 import styles from './Form.module.css';
 
-let initState = {};
+// let initState = {};
 
 export default function Form({
-  submitHandler,
-  inputHandler,
-  editedItem,
+  initialState,
+  // submitHandler,
+  // inputHandler,
+  // editedItem,
+  // errorFormat,
   action,
 }) {
+  // ===------- new ---------===
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const [editedItem, setEditedItem] = useState(initialState);
+  const initialErrorFormat = action === 'edit' ? false : true;
+  const [errorFormat, setErrorFormat] = useState(initialErrorFormat);
+
+  const inputHandler = event => {
+    const { name, value } = event.target;
+
+    if (!validateValue({ [name]: value })) {
+      setErrorFormat(true);
+      // return;
+    } else setErrorFormat(false);
+
+    setEditedItem(prev => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+  // ===----------------===
+  const submitHandler = e => {
+    e.preventDefault();
+    const currentOperation = action === 'edit' ? editGradient : addGradient;
+    dispatch(currentOperation(editedItem));
+    // dispatch(editGradient(editedItem));
+    history.push('/');
+  };
+  // ===------- /new ---------===
   // const history = useHistory();
   // const dispatch = useDispatch();
   // const currentId = match.params.id;
@@ -46,7 +79,9 @@ export default function Form({
   //   history.push('/');
   // };
   // ===========---=============
-
+  // console.log('action = ', action);
+  // console.log('errorFormat = ', errorFormat);
+  // console.log('initialState = ', initialState);
   return (
     <form className={styles.form} onSubmit={submitHandler}>
       <input
@@ -71,6 +106,10 @@ export default function Form({
         type="submit"
         title={`${action} gradient`}
         className={styles.button}
+        disabled={errorFormat}
+        // disabled={`${errorFormat}`}
+        // { errorFormat  && 'disabled'}
+        // {...`${errorFormat ? ['disabled'] : []}`}
       >
         {`${action} gradient`}
       </button>

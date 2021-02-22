@@ -14,7 +14,7 @@ export default function Item({ item }) {
 
   const editIconHandler = e => {
     const li = e.target.closest('LI');
-    console.log('Home: id = ', li.id);
+    // console.log('Home: id = ', li.id);
     history.push(`/edit/${li.id}`);
   };
 

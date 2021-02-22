@@ -5,9 +5,10 @@ import { editGradient } from '../../redux/gradientOperations';
 // import calcGradient from '../../helpers/calcGradient';
 import Form from '../../components/Form/Form';
 import GradientBlock from '../../components/GradientBlock/GradientBlock';
+import validateValue from '../../helpers/validateValue';
 import styles from './Edit.module.css';
 
-let initState = {};
+// let initState = {};
 
 export default function Edit({ match }) {
   const history = useHistory();
@@ -18,18 +19,26 @@ export default function Edit({ match }) {
     state.gradient.items.find(item => item.id === currentId),
   );
   // console.log('currentItem :', currentItem);
-  const [editedItem, setEditedItem] = useState(initState);
+  const initialState = currentItem;
+  const [editedItem, setEditedItem] = useState(initialState);
+  const [errorFormat, setErrorFormat] = useState(false);
 
-  useEffect(() => {
-    if (currentItem) {
-      setEditedItem(currentItem);
-      // initState = { ...currentItem };
-    }
-  }, [currentItem]);
+  // useEffect(() => {
+  //   if (currentItem) {
+  //     setEditedItem(currentItem);
+  //     // initState = { ...currentItem };
+  //   }
+  // }, [currentItem]);
 
   // ===----------------===
   const inputHandler = event => {
     const { name, value } = event.target;
+
+    if (!validateValue({ [name]: value })) {
+      setErrorFormat(true);
+      // return;
+    } else setErrorFormat(false);
+
     setEditedItem(prev => ({
       ...prev,
       [name]: value,
@@ -47,37 +56,16 @@ export default function Edit({ match }) {
     <>
       <div className={styles.EditBlock}>
         <h1 className="title">Edit</h1>
-        {/* <form className={styles.form} onSubmit={submitHandler}>
-          <input
-            name="start"
-            type="text"
-            value={editedItem.start}
-            onChange={inputHandler}
-            className={styles.input}
-            // placeholder="start gradient"
-            required
-          />
-          <input
-            name="end"
-            type="text"
-            value={editedItem.end}
-            onChange={inputHandler}
-            className={styles.input}
-            // placeholder="end gradient"
-            required
-          />
-          <button type="submit" title="edit gradient" className={styles.button}>
-            edit gradient
-          </button>
-        </form> */}
         <Form
-          submitHandler={submitHandler}
-          inputHandler={inputHandler}
-          editedItem={editedItem}
+          initialState={initialState}
+          // submitHandler={submitHandler}
+          // inputHandler={inputHandler}
+          // editedItem={editedItem}
+          // errorFormat={errorFormat}
           action="edit"
         />
 
-        <GradientBlock item={editedItem} />
+        {editedItem && <GradientBlock item={editedItem} />}
       </div>
     </>
   );
