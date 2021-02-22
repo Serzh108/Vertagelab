@@ -13,9 +13,3 @@
 .title {
   margin-bottom: 0.5em;
 }
-
-@media screen and (min-width: 560px) {
-  .App {
-    width: 560px;
-  }
-}

@@ -6,14 +6,6 @@
   width: 90vw;
 }
 
-/* .item div {
-  display: flex;
-  justify-content: space-between;
-  width: calc(100% - 4em);
-  padding: 1em;
-  margin-bottom: 0.5em;
-} */
-
 .icon {
   margin-left: 0.5em;
   color: rgba(4, 4, 80, 0.9);
@@ -22,10 +14,4 @@
 }
 .icon:hover {
   color: rgba(170, 10, 10, 0.9);
-}
-
-@media screen and (min-width: 560px) {
-  .btn {
-    padding: 0.5em 1.6em;
-  }
 }

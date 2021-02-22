@@ -9,7 +9,6 @@ export default function Home() {
 
   return (
     <div className={styles.HomeBlock}>
-      {/* <h1>Home</h1> */}
       <ul className={styles.itemList}>
         {items.map(item => (
           <Item key={item.id} item={item} />

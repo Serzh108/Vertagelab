@@ -8,8 +8,8 @@ export default function GradientBlock({ item }) {
       className={styles.gradientBlock}
       style={{ background: calcGradient(item.start, item.end) }}
     >
-      <span className={styles.itemText}>Start value: {item.start}</span>
-      <span className={styles.itemText}>End value: {item.end}</span>
+      <span className={styles.itemText}>Start: {item.start}</span>
+      <span className={styles.itemText}>End: {item.end}</span>
     </div>
   );
 }

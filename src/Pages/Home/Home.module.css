@@ -13,10 +13,3 @@
 .link:hover {
   color: rgba(170, 10, 10, 0.9);
 }
-
-/* 
-@media screen and (min-width: 560px) {
-  .HomeBlock {
-    font-size: 3em;
-  }
-} */
